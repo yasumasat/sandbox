@@ -1,0 +1,25 @@
+name: Actions Debug
+
+on:
+  workflow_dispatch:
+
+jobs:
+  structured-debug:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Process with debug info
+        run: |
+          echo "::debug::Configuration:"
+          echo "::debug::  - OS: ${{ runner.os }}"
+          echo "::debug::  - Architecture: ${{ runner.arch }}"
+          echo "::debug::  - Workspace: ${{ github.workspace }}"
+
+          for var in $(env | sort); do
+            echo "::debug::Environment: $var"
+          done
+
+          if [ -d ".git" ]; then
+            echo "::debug::Git information:"
+            echo "::debug::  - Current branch: $(git branch --show-current)"
+            echo "::debug::  - Latest commit: $(git rev-parse HEAD)"
+          fi  

@@ -1,0 +1,22 @@
+name: steps
+
+on:
+  workflow_dispatch:
+
+jobs:
+  multiple-steps:
+    runs-on: ubuntu-latest
+    steps:
+      - name: First step
+        id: step1
+        run: echo "Running first step"
+      - name: Second step
+        id: step2
+        env:
+          STEP_INFO: "Second step info"
+        run: |
+          echo "Running second step"
+          echo "Environment variable: $STEP_INFO"
+      - name: Third step
+        id: step3
+        run: echo "Running third step"

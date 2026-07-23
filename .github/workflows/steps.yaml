@@ -20,3 +20,14 @@ jobs:
       - name: Third step
         id: step3
         run: echo "Running third step"
+      - name: Set multiple outputs
+        id: set-values
+        run: |
+          echo "name=John Doe" >> $GITHUB_OUTPUT
+          echo "age=30" >> $GITHUB_OUTPUT
+          echo "location=Tokyo" >> $GITHUB_OUTPUT
+      - name: Use multiple outputs
+        run: |
+          echo "Name: ${{ steps.set-values.outputs.name }}"
+          echo "Age: ${{ steps.set-values.outputs.age }}"
+          echo "Location: ${{ steps.set-values.outputs.location }}"
